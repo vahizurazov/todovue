@@ -29,19 +29,27 @@ export default {
     }
   },
   methods: {
-    // updateTodo({ id, value }) {
-    //   const todo = this.todoList.find(todo => todo.id === id)
-    //   if (!todo) return
-    //   todo.value = value
-    // },
+    checkItem(id) {
+      this.itemsList.map(el => {
+        if (el.id === id) {
+          el.checked = !el.checked
+        }
+        return el
+      })
+    },
+    toggleTodo(id) {
+      console.log('id', id)
+
+      const todo = this.itemsList.find(todo => todo.id === id)
+      if (!todo) return
+      todo.checked = !todo.checked
+    },
     addItem(label) {
-      //  console.log('itemsListBefore',this.itemsList);
       this.itemsList.push({
         id: Math.floor(+new Date() + Math.random() * 0xffffffff).toString(36),
         label,
         checked: false,
       })
-      //  console.log('itemsListAfter',this.itemsList);
     },
   },
 }
