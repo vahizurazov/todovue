@@ -4,10 +4,10 @@
     <input
       type="text"
       class="new-todo"
-      v-model="value"
       v-on:keyup.enter="handleSubmit"
       placeholder="What needs to be done?"
       autofocus
+      v-model="value"
     />
     <!-- onKeyDown={this.handleSubmit}
     onBlur={this.handleBlur}-->

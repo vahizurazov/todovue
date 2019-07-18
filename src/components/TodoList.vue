@@ -3,10 +3,10 @@
     <input id="toggle-all" class="toggle-all" type="checkbox" />
     <label for="toggle-all">Mark all as complete</label>
     <!-- checked={isAllChecked()}
-    onChange={selectAll}-->
+    change={selectAll}-->
     <ul class="todo-list">
       <TodoItem v-for="item in itemsList" :item="item" :key="item.id" />
-      <!-- @deleted="deleted"
+      <!--:removeFn="removeFn"
         @editTodo="editTodo"
       @checked="checked"-->
     </ul>
@@ -25,6 +25,12 @@ export default {
     itemsList: {
       required: true,
       type: Array,
+    },
+    // removeFn: Function,
+  },
+  methods: {
+    log: function() {
+      console.log('asd')
     },
   },
 }

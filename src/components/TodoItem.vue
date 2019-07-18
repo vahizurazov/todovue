@@ -13,6 +13,7 @@
       <label>{{ item.label }}</label>
       <!-- onDoubleClick={this.handleDoubleClick} -->
       <button type="button" class="destroy"></button>
+      <!-- @click="removeFn(item.id)" -->
     </div>
   </li>
 </template>
@@ -25,6 +26,7 @@ export default {
       required: true,
       type: Object,
     },
+    // removeFn: Function,
   },
 }
 </script>
