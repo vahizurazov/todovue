@@ -1,6 +1,8 @@
 <template>
   <footer class="footer">
-    <!-- <Counter itemList={itemList} /> -->
+    <span class="todo-count">
+      <strong>{{ counter }}</strong> items left
+    </span>
     <ul class="filters">
       <li>
         <a href="#/">
@@ -31,6 +33,11 @@
 <script>
 export default {
   name: 'TodoFooter',
-  props: {},
+  props: {
+    counter: {
+      required: true,
+      type: Number,
+    },
+  },
 }
 </script>

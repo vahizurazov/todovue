@@ -8,7 +8,7 @@
         :toggle="allCompleated"
         @toggleAll="toggleAllTodo"
       />
-      <TodoFooter />
+      <TodoFooter :counter="uncompletedTodo.length" />
     </section>
   </div>
 </template>
