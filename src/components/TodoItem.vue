@@ -7,13 +7,13 @@
           />
     -->
     <div class="view">
-      <input class="toggle" type="checkbox" :checked="item.checked" :id="item.id" />
+      <input class="toggle" type="checkbox" v-model="item.checked" :id="item.id" />
+      <!-- :checked="item.checked" -->
       <!-- @change="toggleTodo" -->
       <!-- onChange={this.props.checked(todo.id)} -->
       <label>{{ item.label }}</label>
       <!-- onDoubleClick={this.handleDoubleClick} -->
-      <button type="button" class="destroy"></button>
-      <!-- @click="removeFn(item.id)" -->
+      <button type="button" class="destroy" v-on:click="removeFn(item)"></button>
     </div>
   </li>
 </template>
@@ -26,7 +26,7 @@ export default {
       required: true,
       type: Object,
     },
-    // removeFn: Function,
+    removeFn: Function,
   },
 }
 </script>

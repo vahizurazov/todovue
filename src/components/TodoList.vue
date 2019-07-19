@@ -5,7 +5,7 @@
     <!-- checked={isAllChecked()}
     change={selectAll}-->
     <ul class="todo-list">
-      <TodoItem v-for="item in itemsList" :item="item" :key="item.id" />
+      <TodoItem v-for="item in itemsList" :item="item" :key="item.id" :removeFn="removeFn" />
       <!--:removeFn="removeFn"
         @editTodo="editTodo"
       @checked="checked"-->
@@ -26,7 +26,7 @@ export default {
       required: true,
       type: Array,
     },
-    // removeFn: Function,
+    removeFn: Function,
   },
   methods: {
     log: function() {
