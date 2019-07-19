@@ -1,11 +1,18 @@
 <template>
   <section class="main">
-    <input id="toggle-all" class="toggle-all" type="checkbox" />
+    <input
+      id="toggle-all"
+      class="toggle-all"
+      type="checkbox"
+      :checked="toggle"
+      @click="compleatAllTodo"
+    />
+
     <label for="toggle-all">Mark all as complete</label>
     <!-- checked={isAllChecked()}
     change={selectAll}-->
     <ul class="todo-list">
-      <TodoItem v-for="item in itemsList" :item="item" :key="item.id" :removeFn="removeFn" />
+      <TodoItem v-for="item in todos" :item="item" :key="item.id" :removeFn="removeFn" />
       <!--:removeFn="removeFn"
         @editTodo="editTodo"
       @checked="checked"-->
@@ -22,15 +29,19 @@ export default {
     TodoItem,
   },
   props: {
-    itemsList: {
+    todos: {
       required: true,
       type: Array,
+    },
+    toggle: {
+      required: true,
+      type: Boolean,
     },
     removeFn: Function,
   },
   methods: {
-    log: function() {
-      console.log('asd')
+    compleatAllTodo() {
+      this.$emit('toggleAll')
     },
   },
 }

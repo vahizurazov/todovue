@@ -2,8 +2,12 @@
   <div id="app">
     <section class="todoapp">
       <TodoHeader @addItem="addItem" />
-      <TodoList :itemsList="itemsList" :removeFn="removeTodo" />
-
+      <TodoList
+        :todos="todos"
+        :removeFn="removeTodo"
+        :toggle="allCompleated"
+        @toggleAll="toggleAllTodo"
+      />
       <TodoFooter />
     </section>
   </div>
@@ -23,39 +27,35 @@ export default {
   },
   data() {
     return {
-      itemsList: [],
+      todos: [],
       visibleItems: [],
       newTodo: '',
       view: 'all',
     }
   },
-  methods: {
-    removeTodo: function(todo) {
-      // console.log('todo', todo)
-      this.itemsList.splice(this.itemsList.indexOf(todo), 1)
+  computed: {
+    uncompletedTodo() {
+      return this.todos.filter(e => !e.completed)
     },
-    addItem: function(label) {
-      // console.log('label', label)
-      this.itemsList.push({
+    allCompleated() {
+      return this.todos.length > 0 && this.uncompletedTodo.length === 0
+    },
+  },
+  methods: {
+    removeTodo(todo) {
+      this.todos.splice(this.todos.indexOf(todo), 1)
+    },
+    addItem(label) {
+      this.todos.push({
         id: Math.floor(+new Date() + Math.random() * 0xffffffff).toString(36),
         label,
-        checked: false,
+        completed: false,
       })
     },
-    // checkItem(id) {
-    //   this.itemsList.map(el => {
-    //     if (el.id === id) {
-    //       el.checked = !el.checked
-    //     }
-    //     return el
-    //   })
-    // },
-    // toggleTodo(id) {
-    //   console.log('id', id)
-    //   const todo = this.itemsList.find(todo => todo.id === id)
-    //   if (!todo) return
-    //   todo.checked = !todo.checked
-    // },
+    toggleAllTodo() {
+      let state = this.allCompleated
+      this.todos.forEach(e => (e.completed = !state))
+    },
   },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <li class="todo" v-bind:class="{ completed: item.checked }">
+  <li class="todo" v-bind:class="{ completed: item.completed }">
     <!-- <TodoTextInput
             text={todo.label}
             isEditing={this.state.isEditing}
@@ -7,10 +7,10 @@
           />
     -->
     <div class="view">
-      <input class="toggle" type="checkbox" v-model="item.checked" :id="item.id" />
-      <!-- :checked="item.checked" -->
+      <input class="toggle" type="checkbox" v-model="item.completed" :id="item.id" />
+      <!-- :completed="item.completed" -->
       <!-- @change="toggleTodo" -->
-      <!-- onChange={this.props.checked(todo.id)} -->
+      <!-- onChange={this.props.completed(todo.id)} -->
       <label>{{ item.label }}</label>
       <!-- onDoubleClick={this.handleDoubleClick} -->
       <button type="button" class="destroy" v-on:click="removeFn(item)"></button>
