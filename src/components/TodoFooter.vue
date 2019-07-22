@@ -3,30 +3,20 @@
     <span class="todo-count">
       <strong>{{ counter }}</strong> items left
     </span>
+
     <ul class="filters">
       <li>
-        <a href="#/">
-          <!-- class={view === "all" ? "selected" : ""}
-          onClick={onFilterStateChange}-->
-          All
-        </a>
+        <router-link to="/all">All</router-link>
       </li>
       <li>
-        <a href="#/active">
-          <!-- class={view === "active" ? "selected" : ""}
-          onClick={onFilterStateChange}-->
-          Active
-        </a>
+        <router-link to="/active">Active</router-link>
       </li>
       <li>
-        <a href="#/completed">
-          <!-- class={view === "completed" ? "selected" : ""}
-          onClick={onFilterStateChange}-->
-          Completed
-        </a>
+        <router-link to="/completed">Completed</router-link>
       </li>
     </ul>
-    <!-- <ClearComleted clearCompleted={clearCompleted} /> -->
+
+    <button class="clear-completed" @click="clearCompleted">Clear completed</button>
   </footer>
 </template>
 
@@ -37,6 +27,12 @@ export default {
     counter: {
       required: true,
       type: Number,
+    },
+  },
+
+  methods: {
+    clearCompleted() {
+      this.$emit('clear')
     },
   },
 }

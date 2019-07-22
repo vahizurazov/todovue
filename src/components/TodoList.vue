@@ -7,15 +7,9 @@
       :checked="toggle"
       @click="compleatAllTodo"
     />
-
     <label for="toggle-all">Mark all as complete</label>
-    <!-- checked={isAllChecked()}
-    change={selectAll}-->
     <ul class="todo-list">
       <TodoItem v-for="item in todos" :item="item" :key="item.id" :removeFn="removeFn" />
-      <!--:removeFn="removeFn"
-        @editTodo="editTodo"
-      @checked="checked"-->
     </ul>
   </section>
 </template>

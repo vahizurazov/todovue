@@ -1,16 +1,14 @@
 <template>
-  <div id="app">
-    <section class="todoapp">
-      <TodoHeader @addItem="addItem" />
-      <TodoList
-        :todos="todos"
-        :removeFn="removeTodo"
-        :toggle="allCompleated"
-        @toggleAll="toggleAllTodo"
-      />
-      <TodoFooter :counter="uncompletedTodo.length" />
-    </section>
-  </div>
+  <section class="todoapp">
+    <TodoHeader @addItem="addItem" />
+    <TodoList
+      :todos="todoListFiltered"
+      :removeFn="removeTodo"
+      :toggle="allCompleated"
+      @toggleAll="toggleAllTodo"
+    />
+    <TodoFooter :counter="uncompletedTodo.length" @clear="removeCompleated" />
+  </section>
 </template>
 
 <script>
@@ -34,6 +32,20 @@ export default {
     }
   },
   computed: {
+    filter() {
+      // console.log(this.$route.params.filter)
+      return this.$route.params.filter || ''
+    },
+    todoListFiltered() {
+      switch (this.filter) {
+        case 'active':
+          return this.todos.filter(todo => !todo.completed)
+        case 'completed':
+          return this.todos.filter(todo => todo.completed)
+        default:
+          return this.todos
+      }
+    },
     uncompletedTodo() {
       return this.todos.filter(e => !e.completed)
     },
@@ -56,6 +68,12 @@ export default {
       let state = this.allCompleated
       this.todos.forEach(e => (e.completed = !state))
     },
+    removeCompleated() {
+      this.todos = this.uncompletedTodo
+    },
+  },
+  mounted() {
+    console.log(this.$route.params.filter)
   },
 }
 </script>
