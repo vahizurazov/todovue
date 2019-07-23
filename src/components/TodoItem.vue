@@ -4,7 +4,7 @@
       <input class="toggle" type="checkbox" v-model="item.completed" :id="item.id" />
       <label v-on:dblclick="editTodo">{{ item.label }}</label>
 
-      <button type="button" class="destroy" v-on:click="delItem"></button>
+      <button type="button" class="destroy" v-on:click="removeFn(item)"></button>
     </div>
     <input
       type="text"
@@ -54,9 +54,6 @@ export default {
       })
       this.isEditing = false
       this.editValue = ''
-    },
-    delItem() {
-      this.$emit('removeFn', item)
     },
   },
 }
