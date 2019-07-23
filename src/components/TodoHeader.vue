@@ -25,8 +25,9 @@ export default {
   },
   methods: {
     handleSubmit() {
-      if (this.value === '') return
-      this.$emit('addItem', this.value)
+      const valueTrim = this.value.trim()
+      if (valueTrim === '') return (this.value = '')
+      this.$emit('addItem', valueTrim)
       this.value = ''
     },
   },

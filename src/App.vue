@@ -3,8 +3,8 @@
     <TodoHeader @addItem="addItem" />
     <TodoList
       :todos="todoListFiltered"
-      :removeFn="removeTodo"
-      :edit="updateTodo"
+      @removeFn="removeTodo"
+      @edit="updateTodo"
       :toggle="allCompleated"
       @toggleAll="toggleAllTodo"
     />
@@ -60,7 +60,7 @@ export default {
       this.todos.splice(this.todos.indexOf(todo), 1)
     },
     addItem(label) {
-      this.todos.push({
+      this.todos.unshift({
         id: Math.floor(+new Date() + Math.random() * 0xffffffff).toString(36),
         label,
         completed: false,
@@ -74,12 +74,9 @@ export default {
       this.todos = this.uncompletedTodo
     },
     updateTodo({ id, value }) {
-      console.log('id', id)
-      console.log('value', value)
-
       const todo = this.todos.find(todo => todo.id === id)
       if (!todo) return
-      todo.value = value
+      todo.label = value.trim()
     },
   },
 }
