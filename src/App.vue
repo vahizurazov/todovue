@@ -4,6 +4,7 @@
     <TodoList
       :todos="todoListFiltered"
       :removeFn="removeTodo"
+      :edit="updateTodo"
       :toggle="allCompleated"
       @toggleAll="toggleAllTodo"
     />
@@ -33,7 +34,6 @@ export default {
   },
   computed: {
     filter() {
-      // console.log(this.$route.params.filter)
       return this.$route.params.filter || ''
     },
     todoListFiltered() {
@@ -55,6 +55,8 @@ export default {
   },
   methods: {
     removeTodo(todo) {
+      console.log('todo', this.todos.indexOf(todo))
+
       this.todos.splice(this.todos.indexOf(todo), 1)
     },
     addItem(label) {
@@ -71,9 +73,14 @@ export default {
     removeCompleated() {
       this.todos = this.uncompletedTodo
     },
-  },
-  mounted() {
-    console.log(this.$route.params.filter)
+    updateTodo({ id, value }) {
+      console.log('id', id)
+      console.log('value', value)
+
+      const todo = this.todos.find(todo => todo.id === id)
+      if (!todo) return
+      todo.value = value
+    },
   },
 }
 </script>

@@ -9,7 +9,13 @@
     />
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
-      <TodoItem v-for="item in todos" :item="item" :key="item.id" :removeFn="removeFn" />
+      <TodoItem
+        v-for="item in todos"
+        :item="item"
+        :key="item.id"
+        :removeFn="removeFn"
+        :edit="edit"
+      />
     </ul>
   </section>
 </template>
@@ -32,6 +38,7 @@ export default {
       type: Boolean,
     },
     removeFn: Function,
+    edit: Function,
   },
   methods: {
     compleatAllTodo() {
