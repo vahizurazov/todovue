@@ -9,8 +9,6 @@
       autofocus
       v-model="value"
     />
-    <!-- onKeyDown={this.handleSubmit}
-    onBlur={this.handleBlur}-->
   </header>
 </template>
 

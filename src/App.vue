@@ -8,7 +8,7 @@
       :toggle="allCompleated"
       @toggleAll="toggleAllTodo"
     />
-    <TodoFooter :counter="uncompletedTodo.length" @clear="removeCompleated" />
+    <TodoFooter :todo="todos.length" :counter="uncompletedTodo.length" @clear="removeCompleated" />
   </section>
 </template>
 
@@ -26,8 +26,7 @@ export default {
   },
   data() {
     return {
-      todos: [],
-      visibleItems: [],
+      todos: JSON.parse(localStorage.getItem(`todoVue`)) || [],
       newTodo: '',
       view: 'all',
     }
@@ -77,6 +76,16 @@ export default {
       const todo = this.todos.find(todo => todo.id === id)
       if (!todo) return
       todo.label = value.trim()
+    },
+  },
+  watch: {
+    todos: {
+      deep: true,
+      handler: function() {
+        try {
+          return localStorage.setItem(`todoVue`, JSON.stringify(this.todos))
+        } catch (e) {}
+      },
     },
   },
 }

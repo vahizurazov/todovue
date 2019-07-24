@@ -1,5 +1,5 @@
-<template>
-  <footer class="footer">
+<template >
+  <footer class="footer" v-show="todo > 0">
     <span class="todo-count">
       <strong>{{ counter }}</strong> items left
     </span>
@@ -28,6 +28,7 @@ export default {
       required: true,
       type: Number,
     },
+    todo: Number,
   },
 
   methods: {

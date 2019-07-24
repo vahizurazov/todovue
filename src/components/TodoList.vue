@@ -7,7 +7,7 @@
       :checked="toggle"
       @click="compleatAllTodo"
     />
-    <label for="toggle-all">Mark all as complete</label>
+    <label v-show="todos.length > 0" for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
       <TodoItem v-for="item in todos" :item="item" :key="item.id" @edit="editT" @removeFn="delT" />
     </ul>
