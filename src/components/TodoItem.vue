@@ -2,9 +2,9 @@
   <li class="todo" v-bind:class="{ completed: item.completed, editing: isEditing }">
     <div class="view">
       <input class="toggle" type="checkbox" v-model="item.completed" :id="item.id" />
-      <label v-on:dblclick="editTodo">{{ item.label }}</label>
+      <label v-on:dblclick="editTodo" v-bind:title="massage">{{ item.label }}</label>
 
-      <button type="button" class="destroy" v-on:click="delT"></button>
+      <button type="button" class="destroy" v-on:click="deletItem"></button>
     </div>
     <input
       type="text"
@@ -15,7 +15,6 @@
       v-if="isEditing"
       ref="focusInput"
     />
-    <!-- v-todo-focus="isEditing" -->
   </li>
 </template>
 
@@ -27,13 +26,12 @@ export default {
       required: true,
       type: Object,
     },
-    removeFn: Function,
-    edit: Function,
   },
   data() {
     return {
       isEditing: false,
       editValue: '',
+      massage: 'ХУЛЕ ТАК ДОЛГО ЗАСТЫЛ НА ОДНОМ МЕСТЕ',
     }
   },
   methods: {
@@ -47,7 +45,7 @@ export default {
       if (!this.isEditing) return
       if (this.editValue === '') {
         console.log('this.item.id', this.item)
-        this.delT()
+        this.deletItem()
         this.isEditing = false
         return
       }
@@ -58,18 +56,9 @@ export default {
       this.isEditing = false
       this.editValue = ''
     },
-    delT() {
+    deletItem() {
       this.$emit('removeFn', this.item)
     },
   },
-  // directives: {
-  //   'todo-focus': function(el, binding) {
-  //     console.log('el', el.focus)
-  //     console.log('binding', binding)
-  //     if (binding.value) {
-  //       el.focus()
-  //     }
-  //   },
-  // },
 }
 </script>

@@ -4,7 +4,8 @@
     <input
       type="text"
       class="new-todo"
-      v-on:keyup.enter="handleSubmit"
+      @keyup.enter="handleSubmit"
+      @blur="handleSubmit"
       placeholder="What needs to be done?"
       autofocus
       v-model="value"

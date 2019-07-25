@@ -8,7 +8,14 @@
       :toggle="allCompleated"
       @toggleAll="toggleAllTodo"
     />
-    <TodoFooter :todo="todos.length" :counter="uncompletedTodo.length" @clear="removeCompleated" />
+    <TodoFooter
+      :todo="todos"
+      :counter="uncompletedTodo.length"
+      @clear="removeCompleated"
+      :showBtnClear="uncheckedTodo"
+    />
+
+    <BtnSub :isShow="isShow">{{ btnText }}</BtnSub>
   </section>
 </template>
 
@@ -16,6 +23,7 @@
 import TodoHeader from './components/TodoHeader.vue'
 import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
+import BtnSub from './BtnSub.vue'
 
 export default {
   name: 'app',
@@ -23,12 +31,15 @@ export default {
     TodoHeader,
     TodoList,
     TodoFooter,
+    BtnSub,
   },
   data() {
     return {
       todos: JSON.parse(localStorage.getItem(`todoVue`)) || [],
       newTodo: '',
       view: 'all',
+      btnText: 'Save',
+      isShow: false,
     }
   },
   computed: {
@@ -45,6 +56,9 @@ export default {
           return this.todos
       }
     },
+    uncheckedTodo() {
+      return this.todos.some(e => e.completed)
+    },
     uncompletedTodo() {
       return this.todos.filter(e => !e.completed)
     },
@@ -54,8 +68,6 @@ export default {
   },
   methods: {
     removeTodo(todo) {
-      console.log('todo', this.todos.indexOf(todo))
-
       this.todos.splice(this.todos.indexOf(todo), 1)
     },
     addItem(label) {
@@ -84,7 +96,9 @@ export default {
       handler: function() {
         try {
           return localStorage.setItem(`todoVue`, JSON.stringify(this.todos))
-        } catch (e) {}
+        } catch (e) {
+          console.log('WARNING! ERROR!')
+        }
       },
     },
   },

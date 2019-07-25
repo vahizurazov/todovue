@@ -1,5 +1,6 @@
 <template>
   <section class="main">
+    <!-- eslint-disable-next-line -->
     <input
       id="toggle-all"
       class="toggle-all"
@@ -9,7 +10,14 @@
     />
     <label v-show="todos.length > 0" for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
-      <TodoItem v-for="item in todos" :item="item" :key="item.id" @edit="editT" @removeFn="delT" />
+      <!-- eslint-disable-next-line -->
+      <TodoItem
+        v-for="item in todos"
+        :item="item"
+        :key="item.id"
+        @edit="editT"
+        @removeFn="deletItem"
+      />
     </ul>
   </section>
 </template>
@@ -31,14 +39,12 @@ export default {
       required: true,
       type: Boolean,
     },
-    removeFn: Function,
-    edit: Function,
   },
   methods: {
     compleatAllTodo() {
       this.$emit('toggleAll')
     },
-    delT(item) {
+    deletItem(item) {
       this.$emit('removeFn', item)
     },
     editT({ id, value }) {

@@ -1,7 +1,8 @@
-<template >
-  <footer class="footer" v-show="todo > 0">
+<template>
+  <footer class="footer" v-show="todo.length > 0">
     <span class="todo-count">
-      <strong>{{ counter }}</strong> items left
+      <strong>{{ counter }}</strong>
+      {{ counter === 1 ? 'items' : 'item' }} left
     </span>
 
     <ul class="filters">
@@ -16,7 +17,7 @@
       </li>
     </ul>
 
-    <button class="clear-completed" @click="clearCompleted">Clear completed</button>
+    <button class="clear-completed" @click="clearCompleted" v-show="showBtnClear">Clear completed</button>
   </footer>
 </template>
 
@@ -28,7 +29,8 @@ export default {
       required: true,
       type: Number,
     },
-    todo: Number,
+    todo: Array,
+    showBtnClear: Boolean,
   },
 
   methods: {
