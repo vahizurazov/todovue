@@ -2,7 +2,7 @@
   <li class="todo" v-bind:class="{ completed: item.completed, editing: isEditing }">
     <div class="view">
       <input class="toggle" type="checkbox" v-model="item.completed" :id="item.id" />
-      <label v-on:dblclick="editTodo" v-bind:title="massage">{{ item.label }}</label>
+      <label v-on:dblclick="editTodo" :title="massage">{{ item.label }}</label>
 
       <button type="button" class="destroy" v-on:click="deletItem"></button>
     </div>
@@ -31,20 +31,22 @@ export default {
     return {
       isEditing: false,
       editValue: '',
-      massage: 'ХУЛЕ ТАК ДОЛГО ЗАСТЫЛ НА ОДНОМ МЕСТЕ',
+      massage: 'ХУЛЕ ТАК ДОЛГО ЗАСТЫЛ НА ОДНОМ МЕСТЕ? НАЖМИ ЧТО-ТО!!',
     }
   },
   methods: {
-    async editTodo() {
+    editTodo() {
       this.isEditing = true
       this.editValue = this.item.label
+      this.focusOn()
+    },
+    async focusOn() {
       await this.$nextTick()
       this.$refs.focusInput.focus()
     },
     doneEditTodo() {
       if (!this.isEditing) return
-      if (this.editValue === '') {
-        console.log('this.item.id', this.item)
+      if (this.editValue.trim() === '') {
         this.deletItem()
         this.isEditing = false
         return

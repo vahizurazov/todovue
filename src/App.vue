@@ -1,21 +1,23 @@
 <template>
   <section class="todoapp">
-    <TodoHeader @addItem="addItem" />
+    <TodoHeader @addItem="addItem" v-show="isShowAll" />
     <TodoList
       :todos="todoListFiltered"
       @removeFn="removeTodo"
       @edit="updateTodo"
       :toggle="allCompleated"
       @toggleAll="toggleAllTodo"
+      v-show="isShowAll"
     />
     <TodoFooter
       :todo="todos"
       :counter="uncompletedTodo.length"
       @clear="removeCompleated"
       :showBtnClear="uncheckedTodo"
+      v-show="isShowAll"
     />
 
-    <BtnSub :isShow="isShow">{{ btnText }}</BtnSub>
+    <BtnSub>{{ btnText }}</BtnSub>
   </section>
 </template>
 
@@ -39,7 +41,7 @@ export default {
       newTodo: '',
       view: 'all',
       btnText: 'Save',
-      isShow: false,
+      isShowAll: false,
     }
   },
   computed: {
