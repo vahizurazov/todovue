@@ -17,7 +17,7 @@
       v-show="isShowAll"
     />
 
-    <BtnSub>{{ btnText }}</BtnSub>
+    <BtnSub v-show="!isShowAll">{{ btnText }}</BtnSub>
   </section>
 </template>
 
@@ -41,7 +41,7 @@ export default {
       newTodo: '',
       view: 'all',
       btnText: 'Save',
-      isShowAll: false,
+      isShowAll: true,
     }
   },
   computed: {
